@@ -62,7 +62,7 @@ ggplot(df,aes(type,value,fill=type))+
   scale_fill_manual(values=c('dodgerblue',col[1]),'gray')+
   scale_y_continuous(label=percent_format(accuracy = 1),breaks=pretty_breaks(6),limit=c(0,1))+
   labs(x="",y="")
-ggsave('progress.png',width=6,height=3,dpi=400)
+ggsave('progress.png',width=5.5,height=3,dpi=400)
 
 # Tweet the Graph
 vaccineplots_token <- rtweet::create_token(
