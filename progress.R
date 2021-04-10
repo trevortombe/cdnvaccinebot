@@ -22,7 +22,7 @@ scale_fill_discrete <- function(...) {
 }
 
 # Set time
-accessed<-.POSIXct(Sys.time(), "America/Denver")
+accessed<-as.POSIXlt(Sys.time(), "EST5EDT" )
 
 # Progress Bar
 canada<-as.data.frame(fromJSON('https://api.covid19tracker.ca/reports'))
