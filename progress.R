@@ -1,6 +1,3 @@
-# wipes previous workspace
-rm(list=ls(all=TRUE)) 
-
 # Install Packages and Load
 packages<-c("rtweet","curl","scales","zoo","dplyr",
             "ggplot2","ggthemes","tidyr","jsonlite")
@@ -11,15 +8,6 @@ check.packages <- function(pkg){
   sapply(pkg, require, character.only = TRUE)
 }
 check.packages(packages)
-
-# Your preferred color scheme (https://www.color-hex.com/color-palette/33490)
-col<-c("#CC2529","#396ab1","#3E9651","#DA7C30","#535154","#6B4C9A","#922428","#948B3D")
-scale_colour_discrete <- function(...) {
-  scale_colour_manual(..., values = col)
-}
-scale_fill_discrete <- function(...) {
-  scale_fill_manual(..., values = col)
-}
 
 # Set time
 accessed<-as.POSIXlt(Sys.time(), "EST5EDT" )
@@ -59,7 +47,7 @@ ggplot(df,aes(type,value,fill=type))+
         axis.text.y = element_blank(),
         axis.text.x = element_blank(),
         legend.position = 'none')+
-  scale_fill_manual(values=c('dodgerblue',col[1]),'gray')+
+  scale_fill_manual(values=c('dodgerblue','#CC2529'),'gray')+
   scale_y_continuous(label=percent_format(accuracy = 1),breaks=pretty_breaks(6),limit=c(0,1))+
   labs(x="",y="")
 ggsave('progress.png',width=5.5,height=3,dpi=400)
