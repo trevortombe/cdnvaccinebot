@@ -2,7 +2,7 @@
 name: updateplots
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '30 */4 * * *'
   workflow_dispatch:
 jobs:
   build:
@@ -15,7 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
-      #- uses: r-lib/actions/setup-pandoc@v1
       - name: Run R script
         run: Rscript progress.R
       - name: Commit results
