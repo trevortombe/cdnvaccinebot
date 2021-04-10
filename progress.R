@@ -72,7 +72,8 @@ vaccineplots_token <- rtweet::create_token(
   access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
 )
-#post_tweet(" ",
-#           media="progress.png",
-#           token=vaccineplots_token)
+tweet_text<-paste("Canada's COVID-19 vaccination progress as of",accessed)
+post_tweet(tweet_text,
+           media="progress.png",
+           token=vaccineplots_token)
 
