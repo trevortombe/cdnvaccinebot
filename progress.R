@@ -72,7 +72,7 @@ vaccineplots_token <- rtweet::create_token(
   access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
 )
-post_tweet("",
+post_tweet(" ",
            media="progress.png",
            token=vaccineplots_token)
 
