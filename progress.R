@@ -1,5 +1,5 @@
 # Install Packages and Load
-packages<-c("rtweet","curl","scales","zoo","dplyr",
+packages<-c("rtweet","curl","dplyr",
             "ggplot2","ggthemes","tidyr","jsonlite")
 check.packages <- function(pkg){
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
@@ -35,12 +35,12 @@ df<-data.frame(
   gather(type,value) %>%
   mutate(total=1)
 ggplot(df,aes(type,value,fill=type))+
-  geom_col(aes(y=total),fill='gray90',width=0.4)+
-  geom_col(width=0.4)+
-  annotate('text',x=1.35,y=0,size=5,label=paste("At least one dose:  "),hjust=0)+
-  annotate('text',x=2.35,y=0,size=5,label=paste("Fully vaccinated:  "),hjust=0)+
-  annotate('text',x=1.35,y=1,size=5,label=paste0(round(100*plotdata$any,1),"%"),hjust=1)+
-  annotate('text',x=2.35,y=1,size=5,label=paste0(round(100*plotdata$second,1),"%"),hjust=1)+
+  geom_col(aes(y=total),fill='gray90',width=0.5)+
+  geom_col(width=0.5)+
+  annotate('text',x=1.4,y=0,size=5,label=paste("At least one dose:  "),hjust=0)+
+  annotate('text',x=2.4,y=0,size=5,label=paste("Fully vaccinated:  "),hjust=0)+
+  annotate('text',x=1.4,y=1,size=5,label=paste0(round(100*plotdata$any,1),"%"),hjust=1)+
+  annotate('text',x=2.4,y=1,size=5,label=paste0(round(100*plotdata$second,1),"%"),hjust=1)+
   coord_flip()+
   theme_void()+
   theme(panel.grid.major.y = element_blank(),
@@ -48,7 +48,7 @@ ggplot(df,aes(type,value,fill=type))+
         axis.text.x = element_blank(),
         legend.position = 'none')+
   scale_fill_manual(values=c('dodgerblue','#CC2529'),'gray')+
-  scale_y_continuous(label=percent_format(accuracy = 1),breaks=pretty_breaks(6),limit=c(0,1))+
+  scale_y_continuous(limit=c(0,1))+
   labs(x="",y="")
 ggsave('progress.png',width=5.5,height=3,dpi=400)
 
