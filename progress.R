@@ -10,7 +10,7 @@ check.packages <- function(pkg){
 check.packages(packages)
 
 # Set time
-accessed<-format(as.POSIXlt(Sys.time(), "EST5EDT" ),"%b %d, %H:%m %P")
+accessed<-format(as.POSIXlt(Sys.time(), "EST5EDT" ),"%b %d, %H:%m")
 
 # Progress Bar
 canada<-as.data.frame(fromJSON('https://api.covid19tracker.ca/reports'))
