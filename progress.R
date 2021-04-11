@@ -1,6 +1,6 @@
 # Install Packages and Load
-packages<-c("rtweet","curl","dplyr",
-            "ggplot2","tidyr","jsonlite")
+packages<-c("rtweet","curl",
+            "ggplot2","jsonlite")
 check.packages <- function(pkg){
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
   if (length(new.pkg)) 
@@ -10,37 +10,23 @@ check.packages <- function(pkg){
 check.packages(packages)
 
 # Set time
-accessed<-format(as.POSIXlt(Sys.time(), "EST5EDT" ),"%b %d, %H:%m")
+accessed<-format(as.POSIXlt(Sys.time(), "EST5EDT" ),"%b %d, %H:%M")
 
 # Progress Bar
-canada<-as.data.frame(fromJSON('https://api.covid19tracker.ca/reports'))
-plotdata<-canada %>%
-  select(date=data.date,doses=data.total_vaccinations,dist=data.total_vaccines_distributed,
-         full=data.total_vaccinated) %>%
-  mutate(date=as.Date(date,"%Y-%m-%d")) %>%
-  filter(date>="2020-12-13") %>%
-  gather(type,number,-date) %>% 
-  filter(date==max(date)) %>%
-  select(type,number) %>%
-  spread(type,number) %>%
-  mutate(total=38008005,
-         first=(doses-2*full)/total,
-         second=full/total,
-         any=first+second) %>%
-  select(any,second,total,first)
+latest_data<-as.data.frame(fromJSON('https://api.covid19tracker.ca/summary'))
 df<-data.frame(
-  first=plotdata$any,
-  second=plotdata$second
-) %>%
-  gather(type,value) %>%
-  mutate(total=1)
+  type=c("first","second"),
+  value=c((as.numeric(latest_data$data.total_vaccinations)-
+             as.numeric(latest_data$data.total_vaccinated))/38008005,
+          as.numeric(latest_data$data.total_vaccinated)/38008005)
+)
 ggplot(df,aes(type,value,fill=type))+
-  geom_col(aes(y=total),fill='gray90',width=0.5)+
+  geom_col(aes(y=1),fill='gray90',width=0.5)+
   geom_col(width=0.5)+
   annotate('text',x=1.4,y=0,size=5,label=paste("At least one dose:  "),hjust=0)+
   annotate('text',x=2.4,y=0,size=5,label=paste("Fully vaccinated:  "),hjust=0)+
-  annotate('text',x=1.4,y=1,size=5,label=paste0(round(100*plotdata$any,1),"%"),hjust=1)+
-  annotate('text',x=2.4,y=1,size=5,label=paste0(round(100*plotdata$second,1),"%"),hjust=1)+
+  annotate('text',x=1.4,y=1,size=5,label=paste0(round(100*df[1,2],1),"%"),hjust=1)+
+  annotate('text',x=2.4,y=1,size=5,label=paste0(round(100*df[2,2],1),"%"),hjust=1)+
   coord_flip()+
   theme_void()+
   theme(panel.grid.major.y = element_blank(),
@@ -60,8 +46,6 @@ vaccineplots_token <- rtweet::create_token(
   access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
 )
-tweet_text<-paste("Canada's COVID vaccination progress as of",accessed,"ET")
-post_tweet(tweet_text,
+post_tweet(paste("Canada's COVID vaccination progress as of",accessed,"ET"),
            media="progress.png",
            token=vaccineplots_token)
-
