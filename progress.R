@@ -1,6 +1,6 @@
 # Install Packages and Load
 packages<-c("rtweet","curl","dplyr",
-            "ggplot2","ggthemes","tidyr","jsonlite")
+            "ggplot2","tidyr","jsonlite")
 check.packages <- function(pkg){
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
   if (length(new.pkg)) 
