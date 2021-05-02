@@ -10,7 +10,10 @@ check.packages <- function(pkg){
 check.packages(packages)
 
 # Set time
-accessed<-format(as.POSIXlt(Sys.time(), "EST5EDT" ),"%b %d, %H:%M")
+accessed_date<-format(as.POSIXlt(Sys.time(), "EST5EDT" ),"%b %d")
+accessed_date<-gsub(" 0"," ",accessed_date)
+accessed_time<-format(as.POSIXlt(Sys.time(), "EST5EDT" ),"%H:%M")
+accessed<-paste0(accessed_date," at ",accessed_time," ET")
 
 # Progress Bar
 latest_data<-as.data.frame(fromJSON('https://api.covid19tracker.ca/summary'))
@@ -46,6 +49,6 @@ vaccineplots_token <- rtweet::create_token(
   access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
 )
-post_tweet(paste("Canada's COVID vaccination progress as of",accessed,"ET"),
+post_tweet(paste("Canada's COVID vaccination progress as of",accessed),
            media="progress.png",
            token=vaccineplots_token)
