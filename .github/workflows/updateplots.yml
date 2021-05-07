@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - name: Pushes test file
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'Plots/*.png'
+          destination_repo: 'trevortombe/covidgraphs'
+          destination_folder: 'Plots'
+          user_email: 'trevor.tombe@gmail.com'
+          user_name: 'Trevor Tombe'
+          commit_message: 'Updated progress bar'
