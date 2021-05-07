@@ -25,7 +25,7 @@ jobs:
           git commit -m "Update All Plots" || echo "No changes to commit"
           git push origin || echo "No changes to commit"
       - name: Pushes test file
-        uses: trevortombe/cdnvaccinebot@main
+        uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
