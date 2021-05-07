@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      #- name: Checkout
-      #  uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
