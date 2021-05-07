@@ -4,4 +4,4 @@ This is a bot tweeting COVID vaccination progress through the [@CDNVaccineCount]
 
 ---
 
-![](progress.png)
+![](Plots/progress.png)
