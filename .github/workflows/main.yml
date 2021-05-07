@@ -24,16 +24,3 @@ jobs:
           git add '*.png'
           git commit -m "Update All Plots" || echo "No changes to commit"
           git push origin || echo "No changes to commit"
-      - name: Pushes to another repository
-        uses: trevortombe/covidgraphs@main
-        end:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          destination-github-username: 'trevortombe'
-          destination-repository-name: 'covidgraphs'
-          user-email: trevor.tombe@gmail.com
-          target-branch: main
-        run: |
-          git add '*.png'
-          git commit -m "Update All Plots" || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
