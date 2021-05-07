@@ -16,7 +16,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_destination: 'Plots'
+          source-directory: 'Plots'
           destination_repo: 'trevortombe/covidgraphs'
           destination_folder: 'Plots'
           user_email: 'trevor.tombe@gmail.com'
