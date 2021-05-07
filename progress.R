@@ -39,7 +39,7 @@ ggplot(df,aes(type,value,fill=type))+
   scale_fill_manual(values=c('dodgerblue','#CC2529'),'gray')+
   scale_y_continuous(limit=c(0,1))+
   labs(x="",y="")
-ggsave('progress.png',width=5.5,height=3,dpi=400)
+ggsave('Plots/progress.png',width=5.5,height=3,dpi=400)
 
 # Tweet the Graph
 vaccineplots_token <- rtweet::create_token(
@@ -50,5 +50,5 @@ vaccineplots_token <- rtweet::create_token(
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET"),
 )
 post_tweet(paste("Canada's COVID vaccination progress as of",accessed),
-           media="progress.png",
+           media="Plots/progress.png",
            token=vaccineplots_token)
