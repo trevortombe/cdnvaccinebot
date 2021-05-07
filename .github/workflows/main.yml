@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       TWITTER_CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
       TWITTER_CONSUMER_API_SECRET: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
@@ -24,14 +24,3 @@ jobs:
           git add 'Plots/*.png'
           git commit -m "Update All Plots" || echo "No changes to commit"
           git push origin || echo "No changes to commit"
-      - name: Pushes test file
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'Plots/*.png'
-          destination_repo: 'trevortombe/covidgraphs'
-          destination_folder: 'Plots'
-          user_email: 'trevor.tombe@gmail.com'
-          user_name: 'Trevor Tombe'
-          commit_message: 'Updated progress bar'
