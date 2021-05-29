@@ -1,6 +1,5 @@
 # Install Packages and Load
-packages<-c("rtweet","curl",
-            "ggplot2","jsonlite")
+packages<-c("rtweet","curl","ggplot2","jsonlite")
 check.packages <- function(pkg){
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
   if (length(new.pkg)) 
@@ -20,14 +19,14 @@ latest_data<-as.data.frame(fromJSON('https://api.covid19tracker.ca/summary'))
 df<-data.frame(
   type=c("first","second"),
   value=c((as.numeric(latest_data$data.total_vaccinations)-
-             as.numeric(latest_data$data.total_vaccinated))/38008005,
-          as.numeric(latest_data$data.total_vaccinated)/38008005)
+             as.numeric(latest_data$data.total_vaccinated))/38048738,
+          as.numeric(latest_data$data.total_vaccinated)/38048738)
 )
 ggplot(df,aes(type,value,fill=type))+
   geom_col(aes(y=1),fill='gray90',width=0.5)+
   geom_col(width=0.5)+
   annotate('text',x=1.4,y=0,size=5,label=paste("At least one dose:  "),hjust=0)+
-  annotate('text',x=2.4,y=0,size=5,label=paste("Fully vaccinated:  "),hjust=0)+
+  annotate('text',x=2.4,y=0,size=5,label=paste("Fully vaccinated (% of Total Pop.):  "),hjust=0)+
   annotate('text',x=1.4,y=1,size=5,label=paste0(round(100*df[1,2],1),"%"),hjust=1)+
   annotate('text',x=2.4,y=1,size=5,label=paste0(round(100*df[2,2],1),"%"),hjust=1)+
   coord_flip()+
