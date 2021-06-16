@@ -32,6 +32,8 @@ ggplot(df,aes(type,value,fill=type))+
   coord_flip()+
   theme_void()+
   theme(panel.grid.major.y = element_blank(),
+        panel.background = element_rect(fill = "white",
+                                        colour = "white"),
         axis.text.y = element_blank(),
         axis.text.x = element_blank(),
         legend.position = 'none')+
