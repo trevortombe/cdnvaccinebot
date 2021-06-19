@@ -19,8 +19,8 @@ latest_data<-as.data.frame(fromJSON('https://api.covid19tracker.ca/summary'))
 df<-data.frame(
   type=c("first","second"),
   value=c((as.numeric(latest_data$data.total_vaccinations)-
-             as.numeric(latest_data$data.total_vaccinated))/38328048, # latest real-time estimate from https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2018005-eng.htm
-          as.numeric(latest_data$data.total_vaccinated)/38328048)
+             as.numeric(latest_data$data.total_vaccinated))/38232264, # latest real-time estimate from https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2018005-eng.htm
+          as.numeric(latest_data$data.total_vaccinated)/38232264)
 )
 ggplot(df,aes(type,value,fill=type))+
   geom_col(aes(y=1),fill='gray90',width=0.5)+
