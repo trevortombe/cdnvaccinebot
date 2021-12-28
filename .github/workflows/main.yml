@@ -1,8 +1,8 @@
 # This Actions file will update the vaccine progress on a schedule each day
 name: updateplots
 on:
-  schedule:
-    - cron: '30 1,14,18,22 * * *'
+  #schedule:
+  #  - cron: '30 1,14,18,22 * * *'
   workflow_dispatch:
 jobs:
   build:
