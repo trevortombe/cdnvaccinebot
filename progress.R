@@ -20,15 +20,15 @@ df<-data.frame(
   type=c("first","second","third"),
   value=c((as.numeric(latest_data$data.total_vaccinations)-
              as.numeric(latest_data$data.total_vaccinated)-
-             as.numeric(latest_data$data.total_boosters_1))/38514029,
-          as.numeric(latest_data$data.total_vaccinated)/38514029, # latest real-time estimate from https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2018005-eng.htm
-          as.numeric(latest_data$data.total_boosters_1)/38514029)
+             as.numeric(latest_data$data.total_boosters_1))/38569003, # Updated Jan 1, 2022
+          as.numeric(latest_data$data.total_vaccinated)/38569003, # using real-time estimates https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2018005-eng.htm
+          as.numeric(latest_data$data.total_boosters_1)/38569003)
 )
 ggplot(df,aes(type,value,fill=type))+
   geom_col(aes(y=1),fill='gray90',width=0.5)+
   geom_col(width=0.5)+
   annotate('text',x=1.4,y=0,size=5,label=paste("At least one dose:  "),hjust=0)+
-  annotate('text',x=2.4,y=0,size=5,label=paste("Fully vaccinated:  "),hjust=0)+
+  annotate('text',x=2.4,y=0,size=5,label=paste("At least two doses:  "),hjust=0)+
   annotate('text',x=3.4,y=0,size=5,label=paste("Boosted (% of Total Pop.):  "),hjust=0)+
   annotate('text',x=1.4,y=1,size=5,label=paste0(round(100*df[1,2],1),"%"),hjust=1)+
   annotate('text',x=2.4,y=1,size=5,label=paste0(round(100*df[2,2],1),"%"),hjust=1)+
