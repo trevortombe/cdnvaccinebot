@@ -20,9 +20,9 @@ df<-data.frame(
   type=c("first","second","third"),
   value=c((as.numeric(latest_data$data.total_vaccinations)-
              as.numeric(latest_data$data.total_vaccinated)-
-             as.numeric(latest_data$data.total_boosters_1))/38569003, # Updated Jan 1, 2022
-          as.numeric(latest_data$data.total_vaccinated)/38569003, # using real-time estimates https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2018005-eng.htm
-          as.numeric(latest_data$data.total_boosters_1)/38569003)
+             as.numeric(latest_data$data.total_boosters_1))/38638826, # Updated April 1, 2022
+          as.numeric(latest_data$data.total_vaccinated)/38638826, # using real-time estimates https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2018005-eng.htm
+          as.numeric(latest_data$data.total_boosters_1)/38638826)
 )
 ggplot(df,aes(type,value,fill=type))+
   geom_col(aes(y=1),fill='gray90',width=0.5)+
