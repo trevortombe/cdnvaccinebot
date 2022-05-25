@@ -1,5 +1,5 @@
 # Install Packages and Load
-packages<-c("rtweet","curl","ggplot2","jsonlite")
+packages<-c("rtweet","openssl","curl","ggplot2","jsonlite")
 check.packages <- function(pkg){
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
   if (length(new.pkg)) 
